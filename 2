@@ -1,0 +1,2912 @@
+<s:iterator var="c" value="#session.clist">
+  	<s:property value="c.user_phone"/>
+  </s:iterator>
+  ${clist.user_phone}
+  <s:property value="#session.clist.user_phone"/>
+ctionContext ctx = ActionContext.getContext();
+
+ctx.getApplication().put("app","yingyongfanwei");
+ctx.getSession().put("ses","sessionfanwei");
+ctx.put("req","requestfanwei");
+
+return "message";
+
+ActionContext ctx = ActionContext.getContext();
+ctx.getApplication().put("app","yingyongfanwei");
+ctx.getSession().put("ses","session");
+ctx.put("req","requestfanwe");
+
+
+String realpath = ServletActionContext.getServletContext().getRealPath("/images");
+File savefile = new File(new File(realpath),imageFileName);
+
+
+<validators>
+	<field-validator type="required">
+		<message></message>
+	</field-validator>
+
+	<field-validator type="regex">
+		<param name="expression"></param>
+		<message></message>	
+	</field-validator>
+</validators>
+
+<s:set var="list" value="{'第一个','第二个','第三个'}"/>
+<s:iterator value="#list">
+	<s:property/><br>
+</s:iterator>
+
+<s:set var="maps" value="#{'key1':90,'key2':35}"/>
+
+<s:iterator value="books.{?#this.price>60}">
+	<s:property value="name"/>,价格:<s:property value="price"/>
+</s:iterator>
+
+<%
+    List<String> list = new ArrayList<String>();
+    list.add("小明");
+    list.add("小红");
+    list.add("小刚");
+    request.setAttribute("list",list);
+    %>
+    <c:forEach var="varName" items="${list}" varStatus="varStatusName">
+       ${varName}
+    </c:forEach>
+
+	<a href="<s:url action="helloworld_add" namespace="/test"><s:param name="personid" value="233"/></s:url>">
+		sss</a>
+
+<s:checkboxlist name="list" list="{'java','net','ror','php'}" value="{'java','net'}"/>
+<s:select name="list" list="{'java','net'}" value="java"/>
+<s:select name="beans" list="#request.persons" listKey="personid" listValue="name"/> 
+
+public void save (){
+	Session session = sessionFactory.getCurrenSession();
+	session.beginTransaction();
+	Info info = new Info("传智播客");\
+	info.setContent("guoneizuiqiangde javapeixunjigou ");
+	session.save(info);
+	session.getTransaction().commit();
+
+ApplicationContext ctx = new ClassPathXmlApplicationContext(new String[]{"beans.xml"});
+}
+
+
+
+<bean id="personService" class="cn.itcast.service.impl.PersonServiceBean" scope="prototype"></bean>  每次加载bean都是新的
+
+
+
+
+
+<bean id="personDao" class="cn.itcast.do.impl.PersonDaoBean"></bean>
+<bean id="personService" class="cn.itcast.impl.PersonServiceBean">
+	<constructor-arg index="0" type="cn.itcast.dao.PersonDao" ref="personDao"/>
+	<constructor-arg index="1"value="传智播客"/>
+
+
+<property name="sets">
+	<set>
+		<value>第一个</value>
+		<value>第二个</value>
+		<value>第三个</value>
+	</set>
+	<list>
+		<value>第一个</value>
+		<value>第二个</value>
+	</list>
+	<props>
+		<prop key="key1">value1</prop>
+	</props>
+	<map>
+		<entry key="key-1" value="value-1"/>
+	</map>
+</property>
+
+ <context:annotation-config/> spring 注解
+resource 是注入属性的
+
+------------------------------------------------------------------------------------------------------------------------------------el表达式取值
+Jstl是sun的标准taglib库，c标签   Jstl是标签库和el语言的结合。
+
+el表达式的隐含对象pageScope，requestScope，sessionScope，applicationScope，
+比如${hello}语句首先会从pageScope开始逐个查找scope中的属性，指定域对象语句为${requestScope.hello}
+
+属性值：${hello}
+
+对象值
+
+姓名：${user.username}
+
+年龄：${user.age}
+
+所属组：${user.group.name}
+
+map集合
+
+假设Action中保存map集合：
+
+Map mapvalue=new HashMap();
+
+mapvalue.put(“key1”,”值1”);
+
+mapvalue.put(“key2”,”值2”);
+
+request.setAttribute(“mapvalue”,mapvalue);
+
+${mapvalue.key1}
+
+数组
+
+假设Action中有数组
+
+Char[] char={“1”.”2”};
+
+request.setAttribute(“char”,char);
+
+${char[1]}
+
+数组中的对象
+
+User[] users=new User[10]；
+
+for(int i=0;i<10;i++)
+
+{
+
+  User u=new User();
+
+  u.setUsername(“U_”+i);
+
+  users[i]=u;
+
+}
+
+request.setAttribute(“users”,users);
+
+${users[1].username}
+
+list集合
+
+List list=new ArrayList();
+
+list.add(user1);
+
+list.add(user2);
+
+list.add(user3);
+
+request.setAttribute(“list”,list);
+
+${list[3].username}
+
+el表达式对运算符的支持
+
+1+2=${1+2}
+
+10/5=${10/5}
+
+10 div 5=${10 div 5}
+
+10%3=${10%3}
+
+10 mod 3=${10 mod 3}
+
+el表达式支持算数运算符和逻辑运算符
+
+el表达式的函数
+
+判断值是否为空：
+
+${empty  scope中的属性名}
+
+判断值为非空：
+
+${!empty  scope中的属性名}
+--------------------------------------------------------------------------------------------------------------------------------表创建
+create table student
+(//创建班级信息表
+classtudentNo char(10) primary key,//班级编号
+classtudentName varchar(30) not null,//班级名称
+institute varchar(30) Not null//所属学院
+grade small int,Notnull//年级
+classNum tiny int,Notnull//班级人数
+)
+create table student(
+stuId int primary key,
+stuName varchar(30),
+stuSex varchar(30),
+stuAge int
+grade int
+)
+
+create table grade1(
+kchId int primart key,
+stuId int,
+kchName carchar(30),
+grade int
+)
+
+<context-param>
+	<param-name>contextConfigLocation</param-name>
+	<param-value>classpath:bean1.xml</param-value>
+</context-param>
+
+<listener>
+	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+</listener>
+
+ioc底层原理：
+1、ioc底层原理使用技术
+（1）xml配置文件
+（2）dom4j解决xml
+（3）工厂设计模式
+（4）反射
+
+public class User{
+ public void add(){
+ ........
+}
+}
+User user = new User();
+user.add();
+缺陷：耦合度太高了
+使用工厂模式操作
+public class UserService{
+public void add(){
+
+}
+}
+public class UserServlet{
+UserService s = Factory.getService();
+s.add();
+}
+public class Factory{
+public static UserService getService(){
+return new UserService();
+}
+}
+最终用ioc 
+思想：搞内聚，低耦合。
+ioc怎么实现 控制反转 
+ 第一步：创建一个xml配置文件，
+配置要创建对象类。
+<bean id="userService" class="cn.itcast.UserService"/>
+第二步 创建工厂类，使用dom4j解析配置文件+反射
+ public class UserFactory{
+public static UserService getService(){
+ //1,使用dom4j解析xml文件
+// 根据id值 userService,得到id值对应class属性值
+String classValue = "class属性值"；
+Class clazz = Class.forName(classValue);
+
+clazz.newInstance();
+
+}
+
+ 
+}
+
+
+三种属性注入方法
+（1）使用set方法注入
+（2）使用有参数构造注入
+（3）使用接口注入
+
+public class User{
+
+	private String name;
+	public void setName(String name){
+	this.name = name;
+}
+}
+User user = new User();
+user.setName("abcd");
+
+public class User{
+private String name;
+public User(String name){
+this.name = name;
+}
+}
+User user = new User("lucy");
+
+ public interface Dao{
+public void delete(String name);
+}
+public class DaoImpl implements Dao{
+private String name;
+public void delete(String name){
+this.name = name;
+}
+}
+spring框架只支持前两种方法注入
+set属性注入
+<bean id="book" class="cn.itcast.property.Book">
+	<property name="bookname" vlaue="123d"></property>
+</beans>
+构造参数注入
+<bean id="demo1" class="cn.itcast.property.PropertyDemo1">
+	<constructor-arg name="username" value="zhangsan"></constructor-arg
+</bean>
+注入对象类型
+<bean id="service" class="">
+	<property name="dao" ref="dao">
+</bean>
+<bean id="dao" class="">
+
+</bean>
+p名称空间注入
+<bean id="person" class="cn.icast.property.Person" p:pname="lucy">
+</bean>
+ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+Person person = (Person) context.getBean("person");
+
+注入发杂类型属性
+1,数组
+2，list集合
+3，map集合
+4，property类型
+private String[] arrs;
+private Map<String,String> map;
+private List<String> list;
+private Properties properties; 
+<bean id="person" class="cn.itcast.property.Person">
+	<property name="arrs">
+		//数组
+		<list>
+			<value>小王</value>
+			<value>小马</value>
+			<vlaue>小宋</value>
+		</list>
+	</property>
+		//list
+	<property name="list">
+		<list>
+			<value>1</value>
+			<value>2</value>
+			<value>3</value>
+		</list>
+	</property>
+	<property name="map">
+		<map>
+			<entry key="a" value="lucy"></entry>
+			<entry key="b" value="mary"></entry>
+			<entry key="c" value="tom"></entry>
+		</map>
+	</property>
+	<property name="properties">
+		<props>
+			<prop key="driverclass">com.mysql.jdbc.Driver</prop>
+			<prop key="username>root</prop>
+		</props>
+	<property>
+
+ioc
+控制反转，把对象创建交给spring进行配置
+di
+依赖注入，向类里面的属性中设置值
+它们之间的关系：依赖注入不能单独存在，需要在ioc基础之上完成操作
+
+spring 整合web项目原理
+1，加载spring核心配置文件
+	new对象，功能可以实现，效率很低。
+
+2，实现的思想：把加载配置文件和创建过程，在服务器启动时候完成
+	实现原理：1.ServletContext对象
+		  2.监听器
+		  具体使用：
+			在服务器启动的时候，为每个项目创建一个ServletContext对象
+			在ServletContext对象创建时候，使用监听器可以坚挺到Servle			tContext对象在什么时候创建
+			使用监听器监听到ServletContext对象创建时候，加载spring配			置对象创建 把创建出来的对象放到ServletContext域对象里（s			etAttribute方法）获取对象时候，到ServletContext域得到（g			etAttribute方法）
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------spring的bean管理（注解）
+注解
+1 代码里面特殊的标记，使用注解可以完成功能
+2 注解写法@注解名称（属性名称=属性值）
+3 注解使用在类上面，方法上面和属性上面
+
+spirng注解开发的注解准备
+
+jar包
+引入新的约束
+加入新的属性 <context:component-scan base-package="cn.itcast."></context:component-scan>
+
+Spring提供@Component 的三个衍生注解,spring在后续版本会对其增强
+（1）@Component
+（2）@Controller ：web层
+（3）@Repository ：持久层	
+（4）@Service ：业务层
+ 目前这四个注解功能时一样的，都创建对象	
+
+@Component(value="user") //<bean id="user" class=""/>
+@Scope(value="prototype")
+public class User {
+	public void add(){
+		System.out.println("user");
+	}
+}
+
+3 常见对象单实例和多实例
+@Scope（value="prototype"）
+
+注解注入属性
+@Autowired自动注入属性
+1 创建service类，创建dao类，在service得到dao对象
+private UserDao userDao;
+不需要定义set方法
+@Resource
+/---/name属性值 写注解创建dao对象value值
+@Resource(name="userDao")
+private UserDao userDao;
+-
+配置文件和注解混合使用
+1 创建对象操作使用配置文件方式实现
+2 注入属性的操作使用注解方式实现
+-
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------aop概念
+1 aop:面向切面编程，扩展功能不修改源代码实现
+2.aop采取横向抽取机制，取代了传统纵向继承体系重复性代码
+
+aop原理
+1.
+public class User{
+	public void add(){
+	//添加逻辑
+	//修改源代码，添加日志逻辑
+}
+}
+扩展功能：
+添加数据之后，添加日志功能
+添加之后，记录在什么时间添加哪个用户
+
+解决：纵向抽取机制解决
+public class BaseUser{
+//创建日志添加的方法
+public void writelob(){
+//添加日志逻辑
+}
+}
+public class User{
+publci void add(){
+//添加逻辑 功能扩展，添加日志的功能，调用父类的方法，实现日志功能
+super.writelog();
+}
+}
+问题：比如父类的方法名称发生变化，在子类掉用的方法也需要变化
+所以引出了横向抽取机制
+ aop：横向抽取机制
+底层使用 动态代理方式实现
+第一种情况
+public interface Dao{
+public void add();
+}
+		===============使用动态代理方式，创建接口实现类代理对象
+public calss DaoImpl implements Dao{         创建和DaoImpl类平级对象 这个对象不							是真正对象，代理对象，实现和DaoI						mlp相同功能
+public void add(){
+
+}
+}
+
+第二种情况 没有接口情况
+public class User{
+public void add(){
+
+}
+
+}
+//动态代理实现
+创建User类的子类的代理对象 在子类里面调用父类的方法完成增强
+cglib动态代理，针对没有接口的情况
+
+aop操作术语
+Toinpoint(连接点)：所谓连接点是指那些被拦截到的点。在Spring中，这些点指的是方法，因为spring值支持方法类型的连接点
+Pointcut（切入点）：切入点是指我们要对那些Toinpoint进行拦截的定义。
+Advice（通知/增强）：所谓通知是指拦截到Toinpoint之后所要做的事就是通知。通知分为前置通知，后置通知，异常通知，最终通知，环绕通知（切面要完成的功能）
+Intorduction（引介）：引介是一种特殊的通知在不修改类代码的前提下，Introduction可以在运行期为类动态地添加一些方法或Field
+Target（目标对象）：代理的目标对象（要增强的类）
+Weaving（织入）：是把增强应用到目标的过程。
+	把advice应用到target的过程
+Proxy（代理）：一个类被aop织入增强后，就产生一个结果代理类
+Aspect（切面）：是切入点和通知（引介）的结合
+
+public class User{                 
+public void add(){}
+public void update(){}
+public void delete(){}
+publci void findAll(){}
+}
+连接点：类里面那些方法可以被增强，这些方法称为连接点
+切入点：在类里面可以有很多的方法被增强，比如实际的操作中，只是增强了类里面的add方法和update方法，实际增强的方法称为切入点
+通知/增强：增强的那个逻辑，称为增强，比如扩展日志功能，这个日志功能称为增强
+通知分为前置:在方法之前执行
+后置：在方法之前执行 
+异常：方法出现异常
+最终：在后置之后执行
+环绕：方法之前和之后执行
+
+切面：把增强应用到具体方法上面，过程称为切面
+	把增强用到切入点过程就叫切面
+
+Spring的aop操作
+1 spring里面惊醒aop操作，使用aspectj实现
+（1）aspectj不是spirng一部分，和spring一起使用进行aop操作
+（2）spring2.0以后新增对Aspectj支持
+2 使用aspectj实现aop有两种方式
+（1）基于aspectj的xml配置
+（2）基于aspectj的注解方式
+aop操作准备
+导包  
+引入约束
+
+aop约束
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+注解约束
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+使用表达式配置切入点
+1 切入点，实际增强的功能
+2 常用表达式
+execute(<访问修饰符>？<返回类型><方法名>（<参数>）<异常>)		
+（1）execution(* cn.itcast.aop.Book.add(..))
+(2) execution(* cn.itcast.aop.Book.*(..))
+(3)execution(* *.*(..))
+(4)匹配所有save开头的方法execution(* save*(..))
+Aspect的aop操作
+<aop:config>
+<!-- 配置切入点 -->
+<aop:pointcut expression="execution(* cn.itcast.aop.Book.*(..))" id="pointcut1"/>
+<!-- 切面配置 
+method:增强类里面使用那个方法作为 前置增强	
+-->
+<aop:aspect ref="myBook">
+
+<aop:before method="before1" pointcut-ref="pointcut1"/>
+<aop:after-returning method="after1" pointcut-ref="pointcut1"/>				<aop:around method="around1" pointcut-ref="pointcut1"/>
+</aop:aspect>
+/aop:config>
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------log4j介绍
+1 通过log4j可以看到程序运行过程中更详细的信息
+（1）经常使用log4j查看日志
+2 使用
+（1）导入log4j的jar包
+（2）赋值log4j的配置文件，复制到src下
+3 设置日志级别
+（1）info：看到基本信息
+（2）debug：看到详细信息
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------Spring整合web项目演示
+
+1 演示问题
+（1）action调用service，service调用dao，每次访问action的时候，都会加载spring配置文件
+2, 解决方案
+（1）在服务器启动时候，创建对象加载配置文件
+（2）底层使用监听器、ServletContext对象
+3 在spring里面不需要我们自己写代码实现，帮封装
+（1）封装了一个监听器，值需要配置监听器就可以了
+（2）配置监听器之前做事情，导入spirng整合web项目的jar包
+（3）指定加载spring配置文件位置
+
+基于sapectj的注解aop
+第一步 创建对象
+
+第二步 在spring核心配置文件中，开启aop操作
+<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+第三步 在增强类上面使用注解完成aop操作
+
+spirng的jdbcTemplate操作
+1 spring框架一站式框架
+	（1）针对javaee三层，每一层都有解决技术
+	（2）在dao层，使用jdbcTemplate
+2 sprint对不同持久化层技术都进行封装
+jdbcTemplate使用和dbutils使用很相似，都数据库进行crud操作
+增加
+1，导入jdbcTemplate使用的jar包
+2，创建对象，设置数据库信息
+3，创建jdbcTemplate对象，设置数据库
+4，调用jdbcTemplate对象里面的方法实现操作
+	  //创建对象设置数据库信息
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		dataSource.setUrl("jdbc:mysql:///spring_day03");
+		dataSource.setUsername("root");
+		dataSource.setPassword("123");
+		//常见jdbc模板对象
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		//使用jdbcTemplate对象里面的方法实现操作
+		String sql = "insert into user values(?,?)";
+		int rows = jdbcTemplate.update(sql,"lucy","250");
+		System.out.println(rows);
+	}
+修改
+ 		String sql = "update user set password=? where username=?";
+		int rows = jdbcTemplate.update(sql,"1314","lucy");
+		System.out.println(rows);
+查询
+删除
+		String sql = "delete from user where username=?";
+		int rows = jdbcTemplate.update(sql,"lucy");
+		System.out.println(rows);
+
+dbutils
+QueryRunner runner = new QueryRunner(datasource);
+返回对象
+runner.query(sql,new BeanHandler<User>(User.Class));
+返回list集合
+runner.query(sql,new BeanListHander<User>(User.Class));
+在duutils时候，有接口ResultSetHandler，dbutils提供了针对不同结果实现类
+jdbcTemplate实现查询，有接口RowMapper，jdbcTemplate针对这个接口没有提供
+实现类，得到不同的数据类型需要自己进行数据封装
+
+jdbc实现代码
+@Test
+public void testJDBC(){
+Connection conn = null;
+PrepareStatement psmt = null;
+Result rs = null;
+try{
+	Class.forName("com.mysql.jdbc.Driver");
+	conn = DriverManager.getConnection("jdbc:mysql:///spring_day03","root","123");
+	String sql = "select * from user where username=?";
+	psmt = conn.prepareStatement(sql);
+	psmt.setString(1,"lucy");
+	rs = psmt.executeQuery();
+while(rs.next()){
+	String username = rs.getString("username");
+	String password = rs.getString("password");
+	User user = new User();
+	user.setUsername(username);
+	user.setPassword(password);
+} catch(Exception e){
+	e.printStackTrace();
+} finally{
+try{
+	rs.close();
+	psmt.close();
+	conn.close();
+} catch (SQLException e){
+	e.printStackTrace();
+}
+}
+ 
+}
+}
+2，查询的实现
+第一个 查询返回某一个值
+queryForOject(String sql,Class<T> requiredType):T
+第一个参数是sql语句
+第二个参数是返回类型的class
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String sql = "select count(*) from user";
+		int count = jdbcTemplate.queryForObject(sql, Integer.class);
+		System.out.println(count);
+第二个 查询返回某一个对象
+queryForObject(String sql,RowMapper<T>,Oject..args):T
+第一个参数是sql语句
+第二个参数是RowMapper，是接口，类似于dbutils里面接口
+第三个参数是可变参数
+@Test
+	public void testObject(){
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		dataSource.setUrl("jdbc:mysql:///spring_day03");
+		dataSource.setUsername("root");
+		dataSource.setPassword("123");
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		String sql = "select * from user where username=?";
+		User user = jdbcTemplate.queryForObject(sql,new MyRowMapper(),"lucy");
+		System.out.println(user);
+	}
+}
+class MyRowMapper implements RowMapper<User>{
+
+
+	public User mapRow(ResultSet rs, int num) throws SQLException {
+		String username = rs.getString("username");
+		String password = rs.getString("password");
+		User user = new User();
+		user.setUsername(username);
+		user.setPassword(password);
+		
+		return user;
+	}
+	
+}
+第三个 查询返回list集合
+query(String sql,RowMapper<T>,Oject..args):List<T>
+sql语句
+RowMapper接口，自己写类实现数据封装
+可变参数
+	@Test
+	public void testList(){
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		dataSource.setUrl("jdbc:mysql:///spring_day03");
+		dataSource.setUsername("root");
+		dataSource.setPassword("123");
+		JdbcTemplate jdbcTemplate =new JdbcTemplate(dataSource);
+		String sql = "select * from user";
+		List<User> list = jdbcTemplate.query(sql,new MyRowMapper());
+		System.out.println(list);
+	}
+}
+
+class MyRowMapper implements RowMapper<User>{
+
+
+	public User mapRow(ResultSet rs, int num) throws SQLException {
+		String username = rs.getString("username");
+		String password = rs.getString("password");
+		User user = new User();
+		user.setUsername(username);
+		user.setPassword(password);
+		return user;
+	}
+public UsermapRow(ResultSet rs,int num) throws SQLException{
+	String username = rs.getString("username");
+	String password = rs.getString("password");
+	User user = new User();
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------jdbcTemplate
+spring配置连接池，和dao使用jdbcTemplate
+1，spring配置c3p0连接池
+第一步，导入jar包
+第二部 创建spirng配置文件 配置连接
+comboPooledDataSource dataSource = new ComboPooledDataSource();
+dataSource.setDriverClass("com.mysql.jdbc.Driver");
+dataSource.setJdbcUrl("jdbc:mysql:///spring_day03);
+dataSource.setUser("root");
+dataSource.setPassword("123");
+
+<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource.class">
+	<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+	<property name="jdbcUrl" value="jdbc:mysql:///spring_day03"></property>
+	<property name="user" value="root"></property>
+	<property name="password" value="123"></property>
+</bean>
+
+2 dao使用jdbcTemplate
+（1）创建service和dao，配置service和dao对象，在service注入dao对象
+<bean id="userService" class="cn.itcast.c3p0.UserService">
+	<property name="userDao" ref="userDao"></property>
+</bean>
+<bean id="userDao" class="cn.itcast.c3p0.UserDao">
+（2）创建jdbcTemplate对象，把模板对象注入到dao里面
+<bean id="userDao" class="cn.itcast.c3p0.UserDao">
+	<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+</bean>
+<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+（3）在jdbcTemplate对象里面注入dataSource
+<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource.class">
+	<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+	<property name="jdbcUrl" value="jdbc:mysql:///spring_day03"></property>
+	<property name="user" value="root"></property>
+	<property name="password" value="123"></property>
+</bean>
+<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+	<property name="dataSource" ref="dataSource"></property>
+</bean>
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------spring约束
+spring很全的约束
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+</beans>
+
+
+
+
+spring的事务管理
+
+事物概念
+1 什么事务
+2 事务特性
+3 不考虑隔离性产生读问题
+4 解决读问题
+（1）设置隔离级别
+
+spring事务管理api
+1 spring事务管理两种方式
+第一种 编程式事务管理（不用）
+第二种 声明式管理
+（1）基于xml配置文件实现
+（2）基于注解实现
+2 spring事务管理的api介绍
+接口
+PlatformTransactionManager
+事务管理器
+（1）spring针对不同的dao层框架，提供接口不同的实现类
+org.springframework.jdbc.datasource.DataSourceTransactionManager 
+使用spring jdbc或ibatis进行持久化数据时使用
+ org.springframework.orm.hibernate5.HibernateTransactionManager
+使用Hibernate5版本进行持久化数据时使用
+（2）首先配置事务管理器
+搭建转账环境
+1 创建数据库表，添加数据
+2 创建service和dao类，完成注入关系
+3 需求：小王转账 1000给小马
+小王少1000
+小马少1000
+3 产生问题
+（1）如果小王少了1000之后，出现异常，小马不会多1000，钱就丢失了。
+4 解决：
+（1）添加事务解决，出现异常进行回滚操作。
+
+声明式事务管理(xml配置)
+1 配置文件使用aop思想配置
+1 配置事务管理器
+<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<!--注入dataSource  -->
+	<property name="dataSource" ref="DataSource"></property>
+</bean>
+2 配置事务增强 
+<tx:advice id="txadvice" transaction-manager="transactionManager">
+	<tx:attributes>
+		<tx:method name="account*" propagation="REQUIRED"/>
+		<!-- <tx:method name="insert*"/> -->
+	</tx:attributes>
+</tx:advice>
+3 配置切面
+  <aop:config>
+ <!-- 切入点 -->
+ 	<aop:pointcut expression="execution(* cn.itcast.service.OrdersSource.*(..))" id="pointcut1"/>
+ 	<!--切面  -->
+ 	<aop:advisor advice-ref="txadvice" pointcut-ref="pointcut1"/>
+ </aop:config>
+
+声明式事务管理（注解）
+第一步 配置事务管理区
+<!-- 第一步配置事务管理器 -->
+<bean id="transactionManager" class="org.springframeword.jdbc.datasource.DataSourceTransactionManager">
+	<property name="dataSource" ref="dataSource"></property>
+</bean>
+第二部 配置事务注解
+<!--第二部 开启事务注解  -->
+<tx:annotation-driven transaction-manager="transactionManager"/>
+
+第三步 在要使用事务的方法所在类上添加事务注解
+@Transactional
+public class OrdersService{
+
+
+
+
+
+ssh整合
+Hibernate核心配置文件
+（0）orm思想
+对象关系映射
+（1）数据库信息
+（2）hibernate信息
+（3）hibernate信息
+（4）hibernate核心配置文件
+如果单纯使用hibernate框架，核心配置文件名称hibernate.cfg.xml和位置src下面固定的
+hibernate和spring整合的时候，hibernate核心配置文件名称和位置没有固定要求
+2 hibernate映射配置文件
+（1）实体类和数据库表映射关系使用orm思想
+3 hibernate操作的步骤
+（1）在spring框架对hibernate框架进行封装，使用hibernateTemplate
+
+struts2框架
+1 action操作
+（1）action创建三种方式
+继承类 ActionSupport
+（2）配置action访问路径
+创建struts.xml配置文件，这个文件名称和位置固定
+（3）配置访问action的多个方法
+使用通配符方式配置
+（4）在action获取表单提交数据
+获取request对象
+使用ServletActionContext类获取
+属性封装
+模型驱动
+（5）在action操作域对象
+使用ServletActionContext获取域对象
+（6）  配置struts的过滤器
+2 值栈
+（1）向值栈方数据
+set方法
+push方法
+定义变量，生成get方法
+（2）从值栈获取数据
+在jsp中使用struts标签+ognl获取
+<s:property>
+<s:iterator>
+3 拦截器
+（1）aop和责任链模式
+（2）自定义拦截器
+继承MethodFilterInterceptor
+使用Servlet
+
+
+框架整合
+struts和spring框架整合
+吧struts2的action对象创建交给spring进行管理
+<bean id="" class="" scope="">
+
+spring框架和hibernate框架整合
+吧hibernate核心配置文件里面的数据库配置，直接写在spirng配置文件中
+
+第一次访问很慢，因为第一次访问时候创建sessionFactory对象
+吧sessionFactory对象创建交给spring管理
+在服务器启动时候创建factoryFactory对象
+
+第一步 导入hibernate的jar包
+（1）导入struts2的hibernate的jar包时候有jar冲突问题
+在struts里面有jar包
+javassist—3.11.0.GA.jar
+在hibernate里面有jar包
+javassist-3.18.1-GA.jar
+删除低版本的jar包
+（2）导入spring整合持久化层框架需要导入的jar包
+
+
+
+bean整合hibernate 配置文件
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------bean整合hibernate 配置文件
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- 配置c3p0连接池 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<!-- 注入属性值 -->
+		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+		<property name="jdbcUrl" value="jdbc:mysql:///spring_day04"></property>
+		<property name="user" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+	
+	<!-- sessionFactory创建交给spring管理 -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<!-- 因为在hibernate核心配置文件中，没有数据库配置，数据库配置在spring里面配置，注入dataSource -->
+		<property name="dataSource" ref="dataSource"></property>
+		
+		<!-- 指定使用hibernate核心配置文件 -->
+		<!-- <property name="configLocations" value="classpath:hibernate.cfg.xml"></property> -->
+		
+		<!-- 配置hibernate基本信息 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+			</props>
+		</property>
+		
+		<!-- 配置映射文件引入 -->
+		<property name="mappingResources">
+			<list>
+				<value>cn/itcast/entity/User.hbm.xml</value>
+				<!-- <value>....</value> -->
+			</list>
+		</property>
+		
+	</bean>
+	
+	<!-- 第一步 配置事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<!--注入sessionFactory-->
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 第二步 开启事务注解 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<!-- 配置action的对象 -->
+	<!-- <bean id="userAction" class="cn.itcast.action.UserAction" scope="prototype">
+		注入service
+		<property name="userService" ref="userService"></property>
+	</bean>
+	
+	创建service对象
+	<bean id="userService" class="cn.itcast.service.UserService">
+		注入dao 
+			接口 = 实现类对象
+		
+		<property name="userDao" ref="userDaoImpl"></property>
+	</bean>
+	
+	创建实现类对象
+	<bean id="userDaoImpl" class="cn.itcast.dao.UserDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	
+	创建hibernateTemplate对象
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+		注入sessionFactory
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean> -->
+	
+	<!-- 引入其他spring配置文件 -->
+	<import resource="classpath:user.xml"/>
+	
+</beans>
+
+
+package cn.itcast.dao;
+
+import java.util.List;
+
+import org.hibernate.criterion.DetachedCriteria;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+
+import cn.itcast.entity.User;
+
+public class UserDaoImpl implements UserDao {
+
+	//得到hibernateTemplate对象
+	private HibernateTemplate hibernateTemplate;
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
+	}
+
+	//添加操作
+	public void add() {
+		//hibernateTemplate对hibernate进行封装
+//		HibernateTemplate hibernateTemplate = new HibernateTemplate(sessionFactory);
+//		hibernateTemplate.save(entity);
+		
+//		User user = new User();
+//		user.setUsername("rose");
+//		user.setAddress("japan");
+		
+		//调用save方法实现添加
+//		hibernateTemplate.save(user);
+		
+		//1 get方法：根据id查询
+//		User user = hibernateTemplate.get(User.class, 2);
+//		System.out.println(user.getUsername()+"::"+user.getAddress());
+		
+		//2 find方法查询所有记录
+//		List<User> list = (List<User>) hibernateTemplate.find("from User");
+//		for (User user : list) {
+//			System.out.println(user.getUsername()+"::"+user.getAddress());
+//		}
+		
+
+		//3 find方法条件查询
+		// 查询username值lucy
+		List<User> list = (List<User>) hibernateTemplate.find("from User where username=?", "lucy");
+		for (User user : list) {
+			System.out.println(user.getUsername()+"::"+user.getAddress());
+		}
+	}
+
+	
+}
+
+
+
+
+
+
+
+
+
+struts2课程
+第一天 struts2入门
+第二天 struts数据操作
+第三天 struts2值栈
+第三天 struts2拦截器
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------struts
+概述
+1 struts2框架应用javaee三层结构中web层框架
+2 struts2 框架在struts1框架和webwork基础之上发展的全新的框架
+3 struts2 解决问题：
+	都相当于发生了一次请求
+
+（1）每次访问servlet时候，都会执行service方法
+	写类继承HttpServlet,重写类里面的方法
+	在web.xml中配置servlet访问路径
+（2）访问action，每次访问action的时候，默认执行名称execute方法
+	配置action访问路径
+
+（1）创建strust2核心配置文件
+	核心配置文件名称和位置是固定的
+	位置必须在src下面，名称为struts.xml
+（2）引入dtd约束
+	<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="hellodemo" extends="struts-default" namespace="/">
+		<action name="hello" class="cn.itcast.action.HelloAction">
+		<result name="ok">/hello.jsp</result>
+		</action>
+	</package>
+</struts>
+
+http://localhost:80/struts/hello.action
+
+过滤器  在过滤器实现功能----------------------------------------------------------------------------------------------------------------------------------过滤器
+
+第一步  获取请求路径 得到路径里hello值
+
+第二步 得到src下面的struts.xml，使用dom4j解析得到xml文件中内容
+拿着hello值到xml文件找action标签，匹配name属性值是否一样
+
+第三步 匹配name属性值一样，都是hello
+找到name属性所在的action标签里面另外一个属性class值
+得到值是action全路径
+使用反射实现功能
+Class clazz = Class.forName("action全路径");
+得到名称是execute的方法
+Method m = clazz.getMethod("execute");
+Object obj = m.invoke();
+
+第四步
+得到action方法的返回值
+在struts.xml文件中找到action标签里面有result标签，匹配result标签的
+name属性是否一样
+如果一样，跳转到配置页面
+
+StrutsPrepareAndExecuteFilter
+
+
+标签package 
+类似于代码包，区别不同的action，要配置action，必须首先写package标签，
+在package里面才能配置action
+2 package标签属性
+（1）name属性
+name属性值跟功能本身没有关系的，
+在一个配置文件中可以写多个package标签，name属性值不能相同
+（2）extends属性
+extends="struts-default"
+属性值固定的，struts-default
+写了这个属性之后，在package里配置的类具有action功能
+
+（3）namespage属性
+namespace属性值和action标签里面的name属性值构成访问路径
+
+----------------------------------------------------------------------------------------------------------------------------------------------action
+标签action
+1 action标签配置action访问路径
+2 action标签里面的属性
+（1）name属性
+namespace属性值和action标签里面的name属性值构成访问路径
+在package里面可以写多个action标签，但是action的name属性值不能相同
+（2）class属性
+action全路径
+（3）method属性
+比如在action里面默认执行的方法execute方法，但是在action里面写其他的方法
+让action里面多个方法执行，使用method进行配置
+标签result标签
+1 根据action的方法返回值，配置到不同的路径里面
+2 result标签属性
+（1）name属性
+和方法返回值一样
+<result name="ok">hello.jsp</result>
+（2）type属性
+配置如何到路径中（转发或重定向）
+type属性默认值 做转发操作
+
+（1）表单提交数据到action里面，在action可以获取表单提交数据。
+（2）表单提交数据有中文，有乱码问题，解决：
+post提交直接设置编码
+get提交做编码转换
+（3）如果在action获取表单通过post方式提交中文，中文乱码问题帮解决了，不需要自己处理问题
+
+struts.i18n.encoding=UTF-8
+
+<include file="cn/itcast/action/hello/hello.xml"></include>
+
+1 结果页面配置
+（1）全局结果页面
+（2）局部结果页面
+（3）result标签type属性
+2 在action获取表单提交数据
+（1）使用ActionContext类获取
+（2）使用ServletActionContext类获取
+（3）使用接口注入方式获取
+3 struts 提供获取表单数据方式
+（1）属性封装
+（2）模型驱动封装
+4 struts 提供获取表单数据方式
+（1）封装到list集合
+（2）封装到map集合
+5 扩展-表达式封装和模型驱动比较
+
+6案例-添加客户功能
+
+1 result标签配置action方法的返回值到不同的路径里面
+2 创建两个actoin，执行默认的方法execute，让两个action
+的方法都返回success，返回success之后，配置到同一个页面里面
+全局页面
+<global-results>
+	<result name="success>/hello.jsp</result>
+</global-results>
+既配置了全局页面 又配置了局部页面，结果以局部为准
+
+1 result标签里面除了name属性以外，还有一个属性type属性
+（1）type属性：如何到路径里面（转发还是重定向）
+
+2 type属性值
+（1）默认值，做转发操作，值是dispatecher
+（2）做重定向操作，但是redirect
+（3）上面两个值dispatcher、redirect，这两个值一般针对页面中配置，配置到其他的action里面
+	chain：转发到action，一般是不用的，缓存问题
+	redirectAction：重定向到action
+
+action里面获取表单提交数据
+1 之前web阶段，提交表单到servlet，在servlet里面使用request对象里面的
+对象取，getParameter，getParameterMap
+
+2 提交表单到action，但是action没有request对象，不能直接使用request对象
+
+3 action获取表单提交数据request对象三种方式
+（1）使用ActionContext类
+（2）使用ServletActionContext
+（3）使用接口注入方式（一般不用）
+使用ActionContext类
+（1）因为方法不是静态方法，需要创建ActionContext对象
+（2）这个ActionContext类对象不是new出来的
+static ActionContext getContext（） 获取当前线程的ActionContext对象
+1 具体演示
+（1）创建表单，提交保单到action里面
+（2）在action使用ActionContext获取数据
+ActionContext Context = ActionContext.getContext();
+Map<String,Oject> map = context.getParameters();
+
+
+Set<String> keys = map.keySet();
+for(String key :keys){
+ Object[] ojb = (Oject[]) map.get(key);
+System.out.println(Arrays.toString(obj));
+
+使用ServletActionContext类获取
+（1）调用类里面静态方法，得到request对象
+获取request对象
+HttpServlet request =ServletActionContext.getRequest();
+String username= request.getParameter("username");
+String password = request.getParameter("password");
+String address = request.getParameter("address");
+System.out.println(Username+password+address);
+return NONE;
+
+}
+使用接口注入
+1 使用action实现接口，得到request对象
+implements ServletRquestAware
+@Override
+public void setServletRequest(HttpServletRequest request){
+this.request = request;
+}
+
+在action操作域对象
+1 request、session、servletContext域对象
+2 使用ServletActionContext类来操作
+HttpServletRequest request = ServletActionContext.getRequest（）；
+request.setAttribute("req","reqValue");
+HttpSession session = request.getSession();
+session.setAttribute("sess","sessValue");
+ServletContext context = ServletActionContext.getServletContext();
+context.setAttribute("contextname","contextValue");
+return NONE;
+
+struts封装获取表单数据方式
+ 
+原始方式获取表单封装到实体类对象
+HttpServletRequest request = ServletActionContext.getRequest():
+String username = request.getParameter(username);
+String password = request.getParameter("password");
+String address = request.getParameter("address");
+User user = new User();
+user.setUsername(username);
+user.setPassword(password);
+user.setAddress(address);
+System.out.println(user);
+return NONE;
+
+
+属性封装
+
+
+1 直接把表单提交属性封装到action的属性里面
+2 实现步骤
+（1）在action成员变量位置定义变量
+变量名称和表单输入项的name属性值一样
+（2）生成变量的set方法（吧set和get方法都写出来）
+
+
+private String username;
+private String password;
+private String address;
+然后生成get set方法
+。。。
+3 使用属性封装获取表单数据到属性里面，不能把数据直接封装到实体类对象里面
+
+
+模型驱动封装（重点）
+1 使用模型驱动方式，可以直接把表单数据封装到实体类对象里面
+2 实现步骤
+（1）action实现接口ModelDriven
+（2）实现接口里面的方法getModel方法
+吧创建对象返回
+（3）在action里面创建实体类对象。
+	private User user = new User();
+	public void getModel(){
+	return user;
+	}
+	public String execute() throws Exception{
+	System.out.println(user);
+	return NONE;
+}-----------------------------------------------------------------------------------------------------------------------------------------------------------struts模型驱动
+3 使用模型驱动和属性封装注意问题：
+（1）在一个action中，获取表单数据可以属性封装，和模型驱动封装，
+不能同时使用属性封装和模型驱动封装获取同一个表单数据
+如果同时使用，之后执行模型驱动
+表达式封装（会用）
+1 实现过程
+（1）使用表达式封装可以吧表单输数据封装到实体类对象里面
+第一步 在action里面声明实体类
+表达式封装
+
+1 实现过程
+（1）使用表达式封装可以吧表单数据封装到实体类中
+第一步 在action里面声明实体类
+第二部 生成实体类变量的set和get方法
+第三步 咋表单输入项的name属性值里面写表达式形式
+<input type="text" name="user.username">
+5 扩展表达式封装和模型驱动比较
+1 使用表达式封装和模型驱动封装都可以吧数据封装到实体类对象里面
+2 不同点
+（1）使用模型驱动只能把数据封装到一个实体类对象里面
+在一个action里面不能使用模型驱动把数据封装到不同的实体类
+对象里面
+（2）使用表达式封装可以吧数据封装到不同的实体类对象里面
+封装数据到list集合
+第一步 在action声明list
+private List<User> list;
+第二步 生成list变量的set和get方法
+public List<User> list{
+return list;
+}
+public void setList(List<User> list){
+this.list = list;
+}
+第三步 在表单输入项里面写表达式
+<input type="text" name="list[0].username"/>
+<input type="text" name="list[1].password"/>
+封装数据到Map集合
+第一步 声明map集合
+pirvate Map<String,User> map;
+第二步 生成get和set方法
+public Map<String,User> getMap(){
+return map;
+}
+public void setMap(Map<String,User>){
+ this.map = map;
+}
+第三个 在表单输入项的name属性里面写表达式
+<input type="text" name="map['one'].username"/>
+<input type="text" name="map['two'].username"/>
+
+
+HttpServletRequest request = ServletActionContext.getRequest();
+request.setAttribute("list",list);
+return "list";
+------------------------------------------------------------------------------------------------------------------------------------------ognl表达式
+1,之前web阶段，学过el表达式，el表达式在jsp中获取域对象里面的值
+2 ognl是一种表达式，这个表达式功能更加强大，
+支持对象方法调用。列如 objName.methodName（）。
+
+支持类静态方法调用和值访问，表达式的格式为@[类全名(包括包路径)]@[方法名|值名]。
+列如：@java.lang.String@formal('foo %s','bar').
+
+支持赋值操作和表达式串联
+列如：price=100，discount=0.8，calculatePrice(),在方法中进行乘法计算会返回80
+访问ognl上下文和ActionContext
+操作集合对象
+
+（1）在struts2里面操作值栈数据
+（2）一般把ognl在struts2操作：和sturts2标签一起使用操作值栈
+3 ognl不是struts2的与部分，单独的项目，经常和struts一起使用
+（1）使用ognl时候首先导入jar包，struts2提供了jar包
+
+ognl入门案例
+1 使用ognl+struts标签实现计算字符串长度
+（1）在java代码中，调用字符串.length();
+2 使用struts标签
+（1）使用jdtl时候，导入jar包之外，在jsp页面中引入标签库
+使用struts2标签时候，在jsp中引入标签库
+<%@ taglib uri="/struts-tags" prefix="s"%>
+(2)使用struts标签 
+<property value="'haha'.length()"/>
+
+
+----------------------------------------------------------------------------------------------------------------------------------------值栈
+什么是值栈
+1 之前在web阶段，在servlet里面进行操作，吧数据放到域对象里面，在页面中使用el表达式获取到，域对象在一定范围内，存值和取值
+2 在struts里面提供本身一种存储机制，类似于域对象，是值栈，可以存值和取值
+（1）在action里面吧数据放到值栈里面，在页面中获取到值栈数据
+3 servlet和aciton区别
+（1）servlet：默认是在第一次访问时候创建，创建一次
+（2）action：访问时候创建，每次访问action时候，都会创建action对象，创建多次，多实例对象
+4 值栈存储位置 
+（1）每次访问action时候，都会创建action对象，
+（2）在每个action对象里面都会有一个值栈对象
+获取值栈对象
+1 获取值栈对象有多种方式
+（1）使用actionContext类里面的方法来得到值栈对象
+ActionContext context = ActionContext.getContext();
+ValueStack stack1 = context.getValueStack();
+2 每个action对象中只有一个值栈对象
+值栈的内部结构
+
+1 值栈分为两部分
+第一部分 root，结构是list集合
+（1） 一般操作都是root里面的数据
+class CompoundRoot extends ArrayList{
+第二部分 context，结构map集合
+key              value         context存储的对象引用
+request          request对象引用
+session          HttpSession对象引用
+application      ServletContext对象引用
+parameters       传递的一些参数
+attr             三个域对象，向三个域对象放值，名称都相同
+			setAttribute("name",value);
+			使用attr操作，获取域对象里面的值，获取域范围最小里面的值
+2 struts2里面标签 s:debug,使用这个标签就可以查看值栈结构和存储值
+（1）访问action，执行action的方法有返回值，配置返回值到jsp页面，在jsp页面中使用这个标签
+点击超链接 会有值栈结构
+（2）在action没有做任何操作，栈顶元素是action的引用
+action对象里面会有你值栈对象
+值栈对象里面有action引用
+
+
+1 向值栈中放数据
+第一种 获取值栈对象，调用值栈对象里面的set方法
+ActionContext context = ActionContext.getContext();
+ValueStack stack = context.getValueStack();
+stack.set("username","itcastitheima");
+第二种方式 获取值栈对象，调用值栈对象里面的push方法
+stack.push("abcd");
+第三种  在action定义变量，生成变量的get方法（重点）
+private String name;
+public String getName(){
+return name;
+public String execute(){
+name="abcdefgh";
+}
+
+向值栈放对象
+1 实现步骤
+第一步 定义一个对象变量
+private User user = new User();
+第二步 生成变量的get方法
+public User getUser(){
+return user;
+}
+第三个 在执行的方法里面向对象中设置值
+user.setUsername("lucy");
+user.setPassword("123");
+user.setAddress("美国");
+向值栈放list对象
+第一步 定义list集合变量
+private List<User> list = new ArrayList<User>();
+第二步 生成变量的get方法
+public List<User> getList(){
+return list;
+}
+第三步 在执行的方法里面向list集合设置值
+User user1 = new User();
+user1.setUsername("小奥");
+user1.setPassword("123");
+user1.setAddress("美国");
+User user2 = new User();
+user2.setUsername("小王");
+user2.setPassword("250");
+user2.setAddress("越南");
+list.add(user1);
+list.add(user2);
+---------------------------------------------------------------------------------------------------------------------------------------从值栈中取数据
+获取字符串
+1 使用struts2的标签+ognl表达式获取栈数据
+(1)<s:property value="ognl表达式"/>
+1 向值栈中放入一个字符串
+private String username;
+public String getUsername(){
+return username;
+}
+public String execute() throws Exception{
+username="itcast";
+}
+2 在jsp使用struts2标签+ognl表达式获取
+<s:property value="username"/>
+
+获取对象
+1 向值栈中放入对象
+private User user = new User();
+public User getUser(){
+return user;
+}
+public String execute() throws Exception{
+user.setUsername("mary");
+user.setPassword("250");
+user.setAddress("china");
+
+2 在页面中获取值
+<s:proeprty value="user.username"/>
+<s:property value="user.password"/>
+<s:property value="user.address"/>
+}
+
+获取list集合
+第一种方式
+<s:property value="list[0].username"/>
+<s:property value="list[0].password"/>
+<s:property value="list[0].address"/>
+<br/>
+<s:property value="list[1].username"/>
+<s:property value="list[1].password"/>
+<s:property value="list[1].adderss"/>
+
+第二种方式
+<s:iterator value="list">
+遍历list得到list里面每个user对象
+<s:property value="username"/>
+<s:property value="password"/>
+<s:property value="address"/>
+<s:itreator>
+
+第三种方式：
+<br/>
+<s:iterator value="list" var="user">
+遍历值栈list集合，得到每个user对象
+机制：吧每次遍历出来的user对象放到context里面
+获取context里面数据特点：写ognl表达式
+使用特殊符号#
+<s:property value="#user.username"/>
+<s:property value="#user.password"/>
+<s:property value="#user.address"/>
+</s:iterator>
+
+------------------------------------------------------------------------------------------------------------使用foreach标签和el表达式获取值栈list集合数据
+导包
+<% taglib uri=""%>
+<c:forEach items="${list}" var="user">
+${user.username}
+${user.password}
+${user.address}
+</c:forEach>
+
+其他操作
+1 使用set方法向值栈放数据，获取
+stack.set("itcast","itcasttitheima");
+<s:property value="itcast"/>
+2 使用push方法向值栈放数据，获取
+stack.push("abcd");
+(1)使用push方法设置值，没有名称，只有设置的值
+（2）向值栈放数据，吧向值栈方数据存到数组里面，数组名称top，根据数据获取值
+<s:property value="[0].top"/>
+
+el表达式获取值栈数据（为什么）
+1 el表达式获取域对象
+2 向域对象里面放值使用setArrtibute方法，获取使用getAttribute方法
+3 底层增强request对象里面的方法getAttribute方法
+（1）首先从request域获取值，如果获取到，直接返回
+（2）如果从request域获取不到值，到值栈中把值获取出来，吧值放到域对象里面
+
+
+
+
+ognl的#、%使用
+#使用
+获取list的值第三种方式：
+<s:iterator value="list" var="user">
+遍历值栈list集合，得到每个user对象
+机制：吧每次遍历出来的user对象放到context里面
+获取context里面数据特点：写ognl表达式
+使用特殊符号#
+<s:property value="#user.username"/>
+<s:property value="#user.password"/>
+<s:property value="#user.address"/>
+</s:iterator>
+2 演示#操作
+（1）向request域放值
+（2）在页面中使用ognl获取
+获取conetxt里面数据，写ognl时候，首先添加符号
+#context的key名称.域对象名称
+<s:property value="#request.req"/>
+
+
+%使用
+
+1 在struts2标签中表单标签
+（1）在struts2标签里面使用ognl表达式，如果直接在struts2表单标签里面使用
+ognl表达式不是识别，只有%之后才会识别。
+<s:textfield name="username" value="%{#request.req}">
+
+
+
+
+
+
+hibernate框架
+
+hibernate概述
+什么是框架
+1 写程序，使用框架之后，帮我们实现一部分功能，使用框架好处，
+少写一部分代码实现功能
+
+什么是hibernate（冬眠）框架
+1 hibernate框架应用在javaee三层结构中dao层框架
+
+2 在dao层里面做对数据库crud操作，使用hibernate实现crud操作，hibernate
+底层代码就是jdbc，hibernate对jdbc进行封装，使用hibernate好处，不需要
+写复杂jdbc代码了，不需要写sql语句实现
+
+3 hibernate开源轻量级的框架 
+
+4 hibernate版本
+hibernate3.x
+hibernate4.x
+hibernate5.x
+
+
+什么是orm思想
+1hibernate 使用orm思想对数据库进行crud操作
+
+2 在web阶段学习javabean，更正确的叫法 实体类
+
+3 orm：object 对象 relational 关系 mapping 映射
+（1） 文字描述：
+让实体类和数据库进行一一对应关系
+让实体类首先和数据库表对应
+让实体类属性和表里面字段对应
+（2）不需要直接操作数据库表，而操作表对应实体类对象
+
+jdbc代码
+//加载驱动
+Class.forName("com.mysql.jdbc.Driver");
+//创建连接
+Connection conn = DriverManager.getConnection(url,username,password);
+//对sql进行预编译操作
+String sql = "select * form user";
+PreparedStatement psmt = conn.prepareStatement(sql);
+//执行sql查询sql
+Resut rs = pstm.executeQuery();
+//遍历结果集
+//释放资源
+
+public class User{
+private int uid;
+private String username;
+private String password;
+//set get
+}
+
+create tabel t_user(
+uid int,
+username varchar(100),
+password varchar(100)
+)
+让实体类和表一一对应
+类和表对应
+类里面的属性和表字段对应
+
+使用配置文件完成
+
+
+不需要操作表，而表对应的实体类对象可以了
+hibernate封装的对象session
+//创建实体类对象
+User user = new User();
+user.setUsername("Lucy");
+session.save(user);
+
+
+
+
+
+hibernate入门案例
+搭建hibernate环境
+
+第一步 导入hibernate的jar包
+因为使用hibernate时候，有日志信息输出，hibernate本身没有日志输出的jar包，导入
+其他日志的jar包
+
+第二步创建实体类
+
+（1）使用hibernate时候，不需要自己动手手动创建表，hibernate会帮你把表创建
+第三步 配置实体类和数据库表一一对应关系（映射关系）
+
+使用配置文件实现映射关系
+（1）创建一个xml格式的配置文件
+映射配置文件名称和位置没有固定要求
+建议：在实体类所在包里面常见，实体类名称.hbm.xml
+（2）配置文件是xml格式，在配置文件中首先引入xml约束（能看懂约束）
+学过约束 dtd、schema、在hibernate里面引入的约束都是dtd约束。
+hibernate dtd约束
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+（3）配置映射关系
+user.hbm.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.itcast.entity.User" table="t_user">
+	<!--2 配置实体类id和表id对应  
+	 hibernate要求实体类有一个属性唯一值
+	 hibernate要求表有字段作为唯一值
+	 
+	 id标签
+	 name属性：实体类里面id属性名称
+	 colunm属性：生成的表的字段名称
+	-->
+	
+		<id name="uid" colunm="uid">
+			<generator class="native"></generator>
+		</id>
+		<property name="username" column="username">
+		</property>
+		<property name="password" column="password"></property>
+		<property name="address" colunm="address"></property>	
+	</class>
+</hibernate-mapping>
+
+
+hibernate配置文件
+
+第四步 创建hibernate最核心配置文件
+（1）核心配置文件格式xml，但是核心配置文件名称和位置是固定的
+位置，必须在src下
+名称：必须hibernate.cfg.xml
+（2）引入dtd约束
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+（3）hibernate操作过程中，只会加载核心配置文件，其他配置文件不会加载
+第一部分：配置数据库信息
+第二部分：配置hibernate信息
+第三部分：吧映射文件放到核心配置文件里
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- 第一部分： 配置数据库信息 必须的 -->
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql:///hibernate_day01</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
+		
+		<!-- 第二部分： 配置hibernate信息  可选的-->
+		<!-- 输出底层sql语句 -->
+		<property name="hibernate.show_sql">true</property>
+		<!-- 输出底层sql语句格式 -->
+		<property name="hibernate.format_sql">true</property>
+		<!-- hibernate帮创建表，需要配置之后 
+			update: 如果已经有表，更新，如果没有，创建
+		-->
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<!-- 配置数据库方言
+			在mysql里面实现分页 关键字 limit，只能使用mysql里面
+			在oracle数据库，实现分页rownum
+			让hibernate框架识别不同数据库的自己特有的语句
+		 -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		
+		<!-- 第三部分： 把映射文件放到核心配置文件中 必须的-->
+		<mapping resource="cn/itcast/entity/User.hbm.xml"/>
+	</session-factory>
+</hibernate-configuration>
+
+实现添加操作
+@Test
+	public void testAdd(){
+//		第一步 加载hibernate核心配置文件
+		//在src下面找到名称是hibernate。cfg。xml 在hibernate里面封装对象
+		Configuration cfg = new Configuration();
+		cfg.configure();
+//		第二部 创建SessionFactory对象,读取hibernate核心配置文件内容，创建sessionFactory
+		//在过程中，根据映射关系，在配置数据库里面吧表创建
+		SessionFactory sessionFactory = cfg.buildSessionFactory();
+//		第三步 使用SessionFactory创建session对象
+//		类似连接
+		Session session = sessionFactory.openSession();
+//		第四步 开启事务
+//
+		Transaction tx = session.beginTransaction();
+//		第五步 写具体逻辑crud操作
+		User user = new User();
+		user.setUsername("xiaowang");
+		user.setPassword("250");
+		user.setAddress("日本");
+		session.save(user);
+//		第六步 提交事务
+		tx.commit();
+//		第七步 关闭资源
+		session.close();
+		sessionFactory.close();
+	}
+
+看到效果：
+（1）是否生成表
+（2）看表是否有记录
+
+hibernate的api使用
+
+
+javaee三层结构
+1 web层：struts框架
+
+2 service层：spring框架
+3 dao层：hibernate框架
+对数据库进行crue操作
+
+mvc思想
+1 m：模型
+2 v:视图
+3 c：控制器
+
+hibernate配置文件详解
+Hibernate映射配置文件
+1 映射配置文件名称和位置没有固定的要求，见
+2 映射配置文件中，标签name属性值写实体类相关内容
+（1）class标签name属性值写实体类相关内容
+（2）id标签和property标签name属性值 实体类属性名称
+3 id标签和property标签，colunm属性可以省略的
+（1）不写值和name属性值一样的
+4 property标签 type属性，设置生成表字段的类型，会自动对应类型
+
+hibernate核心配置文件
+1 配置写位置要求
+2 配置三部分的要求
+（1）数据库部分是必须的
+（2）hibernate部分可选的
+（3）映射文件 必须的
+3 核心配置文件名称和位置固定的
+（1）位置：src下面
+（2）名称：hibernate.cfg.xml
+
+hibernate核心api
+
+Configuration
+1 代码
+（1）到src下面找到hibernate.cfg.xml配置文件，创建对象，吧配置文件放到对象里面（加载核心配置文件）
+SessionFactory（重点）
+1 使用configuration对象创建sessionFactory对象
+（1）创建sessionFactory过程中做事情：
+根据核心配置文件中，有数据库配置，有映射文件部分，到数据库里面根据映射关系把表创建
+2 创建sessionFactory过程中，这个过程特别消耗资源的
+（1）在hibernate操作中，建议一个项目一般创建一个sessionFactory对象
+3 具体实现
+（1） 写工具类，写静态代码块
+ 静态代码块在类加载时候执行，执行一次
+	private final static Configuration cfg = null;
+	pirvate final static SessionFactory sessionFactory = null;
+	static {
+		 cfg = new Configuration();
+		cfg.configure();
+		 sessionFactory = cfg.buildSessionFactory();
+	}
+	public static SessionFactory getSessionFactory(){
+		return sessionFactory;
+	}
+}
+
+Session
+1 session类似于jdbc中的connection
+2 调用session里面不同的方法实现crud操作
+（1）天假save方法
+（2）修改update方法
+（3）删除delete方法
+（4）根据id查询get方法
+3 session对象单线程对象
+（1）session对象不能共用，只能自己使用
+Transaction
+1 事物对象
+Transaction tx = session.beginTransaction();
+
+2 事务提交和回滚方法
+tx.commit();
+tx.rollback();
+
+3 事务概念
+(1)事务四个特性
+原子性、一致性、隔离性、持久性
+原子性：一组操作，要不都成功，要么都不成功
+一致性：操作前和操作后，数据和一致
+隔离性：多个事务之间不糊会产生影响
+持久性：提交数据后，在数据库中会生效
+
+
+
+1 实体类编写规则
+（1）实体类里面的属性都是私有的
+（2）私有属性使用公开的get set方法
+（3）要求实体类有属性作为唯一值
+（4）实体类属性建议不适用基本数据类型，使用基本数据类型对应的包装类
+	（1）八个数据基本数据类型对应的包装类
+	int-Integer
+	char-Character、
+	其他的都是首字母大写比如 double-Double
+	（2）比如 表示学生的分数，加入int score=0
+	如果表示学生没有参加考试，int score=0；不能准确表示学生是否参加考试
+	解决：使用包装类就可以了，Integer score = 0，表示学生得了0分
+	表示学生没有参加考试，Integer score = null；
+
+2 hibernate主键生成策略
+（1） hibernate要求实体类里面有一个属性作为值，对应表主键，主键可以不同生成策略
+<generator class="native"></generator>
+ 
+在class属性里面有很多值
+（1）native：根据使用的数据库帮选择哪个值
+（2）uuid：之前web阶段写代码生成uuid值，hibernate帮我们自动生成uuid值
+生成uuid
+（1）使用uuid生成策略，实体类id属性类型 必须字符串类型
+private String uid；
+（2）配置部分写出uuid值
+<generator class="native"></generator>
+3 实体类操作
+（1）crud操作
+添加操作
+1 调用session里面的save方法实现
+User user = new User();
+user.setUsername("小马");
+user.setPassword("1314520");
+user.setAddress("美国");
+session.save(user);
+
+根据id查询
+第一个参数：实体类的calss
+第二个参数：id值
+User user = session.get(User.class,1);
+
+修改操作：
+1 首先查询，修改值
+（1）根据id查询，返回对象
+User user = session.get(User.class,2);
+(2)向返回的user对象里面设置修改之后的值
+user.setUsername("东方不败");
+（3)调用session方法的update修改
+session.update(user);
+
+删除操作：
+第一种方式 根据id查询对象
+User user = session.get(User.class,2);
+session.delete();
+
+第二种方式：
+User user = new User();
+user.setUid(3);
+session.delete(user);
+ SaveOrUpdate();
+User user = new User();
+user.setUid(1);
+user.setUsername("mart");
+user.setAddress("yuenan");
+session.save(user);
+session.
+
+（2）实体类对象状态
+1 实体类状态有三种
+（1）瞬时态
+	对象里面没有id值，对象与session没有关联
+	User u = new User();
+	u.setUsername("jack");
+	u.setAddress("china");
+	session.save(u);
+	一般用来save
+（2）持久态
+	对象里面有id值，对象与session关联
+	User user = session.get(User.class,1);
+（3）托管态
+	User user = new User();
+	user.setUid(3);
+ 2 演示操作实体类对象的方法
+（1）saveOrUpdate方法：实现添加，和修改
+	添加操作
+	User user= new User();
+	user.setUsername("jack");
+	user.setPassword("520");
+	user.setAddress("朝鲜");
+	实体类对象状态时瞬时态，做添加操作
+
+	session.saveOrUpdate(user);
+	User user = new User();
+	user.setUid(6);
+	user.setPassword("123");
+	user.setUsername("suxh");
+	User.setAddress("chaoxian");
+	Session.saveOrUpdate(user);
+	实体类对象状态托管太，做修改操作
+
+	User user = session.get(User.class,1);
+	user.setUser("lilei");
+	user.saveOrUpdate(user);
+	实体类对象状态是持久态，做修改
+	
+
+	
+4 hibernate的一级缓存
+	什么是缓存
+1 数据存到数据库里面，数据库本身是文件系统，使用流方式操作方式效率不是很高
+（1）把数据存到内存里面，不需要使用流方式，可以直接读取内存中的数据
+（2）吧数据放到内存中，提供读取效率
+
+Hibernate缓存
+1 hibernate框架中提供很多优化方式，hibernate的缓存就是一个优化方式
+
+2 hibernate缓存特点：
+第一类 hibernate的一级缓存
+（1）hibernate的一级缓存默认是打开的
+（2）hibernate的一级缓存使用范围 是session范围，从session创建到session关闭范围
+缓存就不存在了
+（3）hibernate的一级缓存中，存储数据必须持久态数据
+
+第二类 hibernate的二级缓存
+（1）目前已经不适用了，替代技术redis
+（2）二级缓存默认不是打开的，需要配置
+（3）二级缓存使用范围，是sessionFactory范围
+
+验证一级缓存存在
+1 验证方式
+（1）首先根据uid=1查询，返回对象
+（2）其次再根据uid=1查询，返回对象
+hibernate一级缓存特性
+1 持久态自动更新数据库
+session.get(User.class,7);
+user.setUsername("hanmeimei");
+//session.update(user);
+会自动更新持久态数据
+
+2 执行过程
+ 
+5 hibernate的事务操作
+事务相关概念
+1 什么是事务
+2 事务的特性
+3不考虑隔离性产生问题
+（1）脏读
+（2）不可重复读
+（3）虚读
+4 设置事务隔离级别
+（1）mysql默认隔离级别 repeateble read
+
+hibernate事务代码规范写法
+1 代码结构
+try{
+	开启事务
+	提交事务
+}catch(){
+	回滚事务
+}finally{
+	关闭资源
+}
+
+SessionFactory sessionFactory = null;
+Session session = null;
+Transaction tx = null;
+try{
+	sessionFactory sessionFactory = HibernateUtils.getSessionFactory();
+	Session session = sessionFactory.openSession();
+	tx = session.beginTransaction();
+	User user = new User();
+	user.setUsername("小马");
+	user.setPassword("23");
+	session.save(user);
+	int i = 10/0;
+}catch(Exception e){
+	e.printStack();
+	tx.rollback();
+
+}finally{
+	session.close();
+	sessionFactory.close();
+}
+
+Hibernate 绑定session
+1 session类似于jdbc的connection，之前web阶段学过threadLocal
+
+2 帮实现与本地线程绑定session
+
+3 获取与本地线程session
+（1）在hibernate核心配置文件中配置
+<property name="hibernate.current_session_context_class">thread</property>
+（2）调用sessionFactory里面的方法得到
+提供返回与本地线程帮的session的方法
+	public static Session getSessionobject(){
+		return sessionFactory.getCurrentSession();
+}
+
+Session session = null;
+session = HibernateUtils.getSessionobject();
+
+4 获取与本地线程绑定session时候，关闭session报错,不需要手动关闭session
+session was already close;
+
+
+
+6 hibernate的其他api（查询）
+Query对象
+1 使用query对象，不需要写sql语句，但是写hql语句
+（1）hql：hibenrate query language hibernate提供查询语言，
+这个hql语句和普通sql很相似，但是有区别
+（2）hql和sql语句区别
+使用sql操作表和表字段
+使用hql操作实体类和属性
+
+2 查询所有hql语句
+（1）form 实体类名称
+
+3 Query对象使用
+（1）创建Query对象
+	Query query = session.createQuery(""from User);
+（2）调用query对象里面的方法得到结果。
+List<User> list = query.list();
+for(User user :list){
+System.out.println(list);
+}
+
+
+Criterica对象
+1 使用这个对象查询操作，但是使用这个对象时候，不需要写语句，直接调用方法实现
+
+2 实现过程
+（1）创建criteria对象
+Criteria criteria = session.createCriteria(User.class);
+（2）调用对象里的criterica对象里面的方法得到结果
+List<User> list = criteria.list();
+for(User user :list){
+System.out.println(list);
+}
+
+SQLQuery对象
+1 使用hibernate的时候，调用底层sql实现
+
+2 实现过程
+（1）创建对象
+	SQLQuery sqlQuery = session.createSQLQuery("select * from t_user");
+（2）调用对象的方法得到结果
+List<Object[]> list = sqlQuery.list();
+返回list集合每部分都是数组
+for(Object[] objects :list){
+System.out.println(Arrays.toString(Objects));
+}
+
+返回的list中每部分是对象形式
+sqlQuery.addEntity(User.class);
+List<User> list = sqlQuery.list();
+for(User user : list){
+System.out.println(user);
+}
+
+
+
+
+
+
+0 列表功能实现
+1 sessionFactory已经关闭了，不需要关闭
+ 
+ 
+
+2 dao里面代码
+	//使用hibernate实现查询列表
+	public List<Customer> findAll() {
+		SessionFactory sessionFactory = null;
+		Session session = null;
+		Transaction tx = null;
+		try {
+			//得到sessionFactory
+			sessionFactory = HibernateUtils.getSessionFactory();
+			//得到session
+			session = sessionFactory.openSession();
+			//开启事务
+			tx = session.beginTransaction();
+			
+			//查询所有记录
+			Criteria criteria = session.createCriteria(Customer.class);
+			List<Customer> list = criteria.list();
+			
+			//提交事务
+			tx.commit();
+			return list;
+		}catch(Exception e) {
+			tx.rollback();
+		}finally {
+			session.close();
+			//sessionFactory不需要关闭
+//			sessionFactory.close();
+		}
+		return null;
+	}
+
+1 表与表之间关系回顾
+（1）一对多（客户和联系人）
+（2）多对多（用户和角色）
+
+2 hibernate一对多操作
+（1）一对多映射配置
+（2）一对多级联保存
+（3）一对多级联删除
+（4）inverse属性
+
+3 hibernate多对多操作
+（1）多对多映射配置
+（2）多对多级联保存（重点）
+（3）多对多级联删除
+（4）维护第三张表
+
+1 一对多
+（1）分类和商品关系，一个分类里面有多个商品，一个商品只能属于一个分类
+
+（2）客户和联系人是一对多关系
+- 客户：与公司有业务往来，百度、新浪、360
+- 联系人：公司里面的员工，百度里面有很多员工，联系员工
+** 公司和公司员工的关系
+
+- 客户是一，联系人是多
+- 一个客户里面有多个联系人，一个联系人只能属于一个客户
+
+（3）一对多建表：通过外键建立关系
+
+
+2 多对多
+（1）订单和商品关系，一个订单里面有多个商品，一个商品属于多个订单
+
+（2）用户和角色多对多关系
+- 用户： 小王、小马、小宋
+- 角色：总经理、秘书、司机、保安
+** 比如小王 可以 是总经理，可以是司机
+** 比如小宋 可以是司机，可以是秘书，可以保安
+** 比如小马 可以是 秘书，可以是总经理
+-	一个用户里面可以有多个角色，一个角色里面可以有多个用户
+
+（3）多对多建表：创建第三张表维护关系
+
+3 一对一
+（1）在中国，一个男人只能有一个妻子，一个女人只能有一个丈夫
+
+
+
+Hibernate的一对多操作（重点）
+
+一对多映射配置（重点）
+
+以客户和联系人为例：客户是一，联系人是多
+
+第一步 创建两个实体类，客户和联系人
+
+第二步 让两个实体类之间互相表示
+（1）在客户实体类里面表示多个联系人
+- 一个客户里面有多个联系人
+在客户实体类里面表示多个联系人，一个客户有多个联系人
+hibernatee要求是用集合表示多的数据，使用set集合
+private Set<LinkMan> setLinkMan = new HashSet<LinkMan>();
+public Set<LinkMan> getSetLinkMan(){
+	return setLinkMan;
+}
+public void setSetLinkMan(Set<LinkMan> setLinkMan){
+	this.setLinkMan = setLinkMan
+}
+
+（2）在联系人实体类里面表示所属客户
+一个联系人只能属于一个客户
+//在联系人实体类里面表示所属客户，一个联系人只能属于一个客户
+private Customer customer;
+public Customer getCustomer(){
+	return customer;
+}
+public void setCustomer(Customer customer){
+	this.customer = customer;
+}
+
+第三步 配置映射关系
+（1）一般一个实体类对应一个映射文件
+（2）把映射最基本配置完成
+
+（3）在映射文件中，配置一对多关系
+- 在客户映射文件中，表示所有联系人
+<!--在客户映射文件中，表示所有联系人
+			使用set标签表示所有联系人
+			set标签里面有name属性：属性值写在客户实体类里面表示联系人的set集合名词
+		  -->
+		<set name="setLinkMan">
+		<!--一对多建表，有外键：双向维护外键，在意和多的那一方都要配置外键
+			column属性值，外键名词
+		  -->
+			<key column="clid"></key>
+			<!--可和所有的联系人，class里面写联系人实体类全路径  -->
+			<one-to-many class="cn.itcast.entity.LinkMan"/>
+在联系人映射文件中，表示所属客户    
+<many-to-one name="customer" class="cn.itcast.entity.Customer" column="clid"></many-to-one>
+
+第四步 创建核心配置文件，吧映射文件引入到核心配置文件
+<mapping resource=""/>
+
+
+一对多级联操作
+级联操作
+1 级联保存
+（1）添加一个客户，为这个客户添加多个联系人
+
+2 级联删除
+（1）删除某一个客户，这个客户里面的所有的联系人也删除
+
+一对多级联保存
+1 添加客户，为这个客户添加一个联系人
+		Customer customer = new Customer();
+			customer.setCustName("传智播客");
+			customer.setCustLevel("vip");
+			customer.setCustSource("网络");
+			customer.setCustPhone("110");
+			customer.setCustMobile("999");
+			
+			LinkMan linkman = new LinkMan();
+			linkman.setLkm_name("lucy");
+			linkman.setLkm_gender("男");
+			linkman.setLkm_phone("911");
+			
+			customer.getSetLinkMan().add(linkman);
+			linkman.setCustomer(customer);
+（2）简化写法
+一般根据客户添加联系人
+第一步 在客户映射文件set标签里进行配置
+<set name="setLinkMan" cascade="save-update">
+第二步 创建客户和联系人对象，只需要吧联系人放到客户里面就可以了，最终只要保存客户就可以了
+
+
+一对多级联删除
+1 删除某个客户，吧客户里面所有的联系人删除
+
+2 具体实现
+第一步 在客户映射文件set标签，进行配置
+（1）使用属性cascade="delete" 多个属性用逗号隔开
+第二部 在代码中之间删除客户
+（1）根据id查询对象，调用session里面delete方法删除
+
+
+
+一对多修改操作
+1 让lucy联系人所属客户不是传智播客，而是百度
+//1根据id查询lucy联系人，根据id查询百度的客户
+Customer baidu = session.get(Customer.class,1);
+LinkMan lucy = session.get(LinkMan.class,2);
+//2 设置持久态对象值
+吧联系人放到客户里面
+baidu.getSetLinkMan().add(lucy);
+吧客户放到联系人里面
+lucy.setCustomer(biadu);
+2 inverse 属性
+（1）因为hibernate双向维护外键，在客户和联系人里面都需要维护外键，修改客户时候
+修改一次外键，修改联系人时候，也修改一次外键，造成效率问题
+（2）解决方式 让其中的一方不维护外键
+ 一对多里面，让其中一方放弃外键维护，一放弃
+一个国家有总统，国家有很多人，总统不能认识国家所有人，国家所有人可以认识总统
+在放弃关系维护映射文件中，进行配置，在set标签上使用inverse属性
+inverse属性默认值：false不放弃关系维护 true表示放弃关系维护
+
+
+hibernate多对多操作
+
+多对多映射配置
+以用户和角色为例演示
+第一步 创建实体类，用户和角色
+
+第二步 让两个实体类互相表示
+（1）用户里面表示表示所有角色，使用set集合
+
+（2） 一个角色有多个用户 使用set集合
+
+第三步 配置映射关系
+（1）基本配置
+
+（2）配置多对多关系
+	<set name="setRole" table="user_role">
+		<!--key标签里面配置
+		配置当前映射文件在第三张表外键名词  
+		class:角色实体类全路径
+		column：角色咋第三张表外键名称-->
+			<key column="userid"></key>
+			<many-to-many class="cn.itcast.manytomany.Role" column="roleid"></many-to-many>
+		</set>
+在用户里面表示所有角色，使用set标签
+<set name="setUser" table="user_role">
+			<key column="roleid"></key>
+			<many-to-many class="cn.itcast.manytomany.User" column="userId"></many-to-many>
+		
+		</set>
+在角色里面表示所有用户，使用set标签
+
+第四步 在核心配置文件中引入映射文件
+
+
+测试：
+
+
+
+多对多级联保存
+根据用户保存角色
+
+第一步 在用户配置文件中 set标签进行配置，cascade值save-update
+
+第二部 写代码实现
+（1）创建用户和角色对象，吧角色放到用户里面，最终保存用户就可以了
+
+多对多级联删除
+
+
+维护第三张表关系
+1 用户和角色多对多关系，维护关系通过第三张表维护
+
+2 让某个用户有某个角色
+第一步 根据id查询用户和角色
+第二部 吧角色放到用户里面
+（1）吧角色对象放到用户set集合
+3 让某个用户没有某个角色
+第一步 根据id查询用户和角色
+
+第二部 从用户里面吧角色去掉
+（1）从set集合里面吧角色移除
+user.getSetRole().remove(role);
+
+
+
+
+
+hibernate查询方式
+
+1 对象导航查询
+（1）根据id查询出某个客户，再查询这个客户里面所有的联系人
+
+2 oid查询
+（1）根据id查询某一条记录，返回的是对象
+
+3 hql查询
+（1）Query对象，写hql语句实现查询
+
+4 QBC查询
+（1）Criteria对象
+
+5 本地sql查询
+（1）SQLQuery对象，使用普通sql实现查询
+
+
+对象导航查询
+
+1 查询某个客户里面所有联系人过程，使用对象导航实现
+
+2 代码
+根据cid=1客户，再查询这个客户里面所有联系人
+Customer customer = session.get(Customer.class,1);
+Set<LinkMan> linkman = customer.getSetLinkMan();
+
+OID查询
+1 根据id查询记录
+（1）调用session.get();方法实现
+
+HQL查询
+
+1 hql： hibernate query language hibernate提供的一种查询语言，
+hql语言和sql很相似，但是有一个很大的区别：
+普通sql操作数据库和字段，hql操作实体类和属性
+
+2 常用的hql语句
+
+3 使用hql查询操作的时候，使用query对象
+（1） 常见query对象，写hql语句
+（2）调用query对象里面的方法得到结果
+
+（1）查询所有
+1 查询所有客户记录
+from 实体类名称
+Query query = session.createQuery("from Customer");
+List<Customer> list = query.list();
+for(Customer customer : list){
+System.out.println(customer.getCid());
+}
+（2）条件查询
+1 hql条件查询语句写法
+2 from 实体类名称 where 是实体类属性名称=？and实体类睡醒名称=？
+from 实体类名称 where 实体类属性名称 like？
+ 
+Query query = session.createQuery("from Customer c where cid=? and cusName=?");
+向？里面设置值
+setParameter方法两个参数
+第一个参数：int类型是？位置，？位置从0开始
+第二个参数：具体参数值
+设置第一个？值
+query.setParameter(0,1); 
+query.setParameter(1,"百度");
+
+调用方法得到结果
+List<Customer> list = query.list();
+
+模糊查询
+
+（3）排序查询
+1 hql排序语句写法
+（1）from 实体类名称 order by 实体类属性名称 asc/desc
+Query query = session.createQuery("from Customer order by cid adc");
+List<Customer> list = query.list();
+
+（4）分页查询
+1 mysql实现分页
+（1）用到一个关键字 limit
+select * from t_customer limit 0,3
+
+2 在hql实现分页
+（1）在hql操作中，在语句里面不能写limit，hibernate的Query对象封装两个方法
+实现分页操作
+创建query对象， 写查询所有的语句
+Query query = session.createQuery("from Customer");
+设置分页数据
+设置开始位置
+query.setFirstResult(0);
+设置每页记录数
+Query.setMaxResults(3);
+
+（5）投影查询
+1 投影查询
+select custome form t_customer 
+查询的不是所有字段值，而时部分字段的值只查部分字段
+2 投影查询hql语句写法
+（1）select 实体类属性名称1，实体类属性名称2 from 实体类名称
+（2）select 后面不能写*，不支持的
+Query query = session.createQuery("select custName from Customer");
+list<Object> list = query.list();
+for(Object object :list){
+System.out.println(object);
+}
+（6）聚集函数使用
+1 常用的聚集函数
+（1）count sum avg max min
+select count(*) from t_customer
+2 hql聚集函数语句写法
+（1）查询表记录数
+select count(*) from Customer
+Query query = session.createQuery("select count(*) from Customer");
+Object obj = query.uniqueResult();
+Long lobj = (long)ojb;
+int count = lojb.inValue();
+System.out.println(count);
+
+QBC查询
+1 使用hql查询需要写hql语句实现，但是使用qbc时候，不需要写语句了，使用方法实现
+2 使用qbc时候，操作实体类和属性
+3 使用qbc，使用Criteria对象查询
+
+查询所有
+
+1 创建Criteria对象
+2 调用方法得到结果
+Criteria criteria = session.createCriteria(Customer.class);
+List<Customer> list = criteria.list();
+for(Customer customer : list){
+System.out.println(cutomer.getCid()+);
+}
+
+条件查询
+1 没有语句，使用封装的方法实现
+Criteria criteria = session.createCriteria(Customer.class);
+使用Criteria对象里面的方法设置条件值
+首先使用add方法，表示设置条件值
+在add方法里面使用类的方法实现条件设置
+criteria.add(Restrictions.eq("cid",1));
+criteria.add(Restrictions.eq("custName","百度"))；
+List<Customer> list = criteria.list();
+for(Customer customer : list){
+	System.out.println(cutomer);
+}
+模糊查询
+criteria.add(Restrictions.like("customer","%百%"))
+
+
+排序查询
+
+Criteria criteria = session.createCriteria(Customer.class);
+设置对哪个属性进行排序，设置排序规则
+criteria.addOrder(Order.asc("cid"));
+
+
+分页查询
+
+Criteria criteria = session.createCriteria(Customer.class);
+criteria.setFirstResult(0);
+criteria.setMaxResult(3);
+
+开始位置计算公式：（当前页-1）*每页记录数
+
+统计查询
+Cirteria criteria = session.createCriteria(Customer.class);
+设置操作
+criteria.setProjection(Projections.rowCount());
+Object obj = criteria.uniqueResult();
+Long lobj = (Long) obj;
+int count = lobj.intValue();
+System.out.println(count);
+
+
+
+离线查询
+不用session对象
+DatchedCriteria detacheCriteria = DetachedCriteria.forClass(Customer.class);
+最终执行时候才需要到session
+Criteria criteria = datachedCriteria.getExecutableCriteria(session);
+List<Customer> list = criteria.list();
+1 servlet 调用 service ，service 调用dao 
+（1）在dao里面对数据库crud操作
+（2）在dao里面使用hibernate框架，使用hibernate框架时候，
+调用session里面的方法实现功能
+
+
+hql多表查询
+mysql里面多表查询
+1 内连接
+select * from t_customer c,t_linkman l where c.cid = l.clid
+select *form t_customer c inner join t_linkman l on c.cid = l.clid
+
+2 左外连接
+select * from t_customer c left outer join t_linkman l on c.cid = l.clid
+左边表的所有
+
+
+3 右外连接
+select * from t_customer c rigth outer join t_linkan l on c.cid = 1.clid
+右边表的所有
+
+HQL实现多表查询
+Hql多表查询
+（1） 内连接
+（2）左外连接
+（3）右外连接
+（4）迫切内连接
+（5） 迫切左外连接
+
+hql内连接
+1 内连接查询hql语句写法
+（1）from Customer c inner join c.setLinkMan
+hql左外连接
+Query query = session.createQuery("from Customer c inner join c.setLinkMan");
+list list = query.list();
+返回list，list里面每部分是数组形式
+2 演示迫切内连接
+（1）迫切内连接和内连接底层实现一样的
+（2）区别：使用内连接返回list中每部分是数组，迫切内连接返回list每部分是对象
+(3)hql语句写法
+from Customer c inner join fetch c.setLinkMan
+
+hql左外连接
+1 左外连接hql语句
+（1）from Customer c left outer join c.setLinkMan
+(2)迫切左外连接fromCustomer c left outer join fetch c.setLinkMan
+
+2 左外连接返回list中每部分是数组，迫切左外连接返回list每部分是对象
+
+1 右外连接hql语句
+（1）from Customer c right outer join c.setLinkMan
+
+hibernate检索策略
+检索策略概念
+1 hibernate检索策略分为两类
+（1）立即检索
+根据id查询，调用get方法，一调用get方法马上发送语句来查询数据库
+Customer customer = session.get(Customer.class,1 );
+（2）延迟检索： 根据id查询，还有load方法，调用load方法不会马上发送语句查询数据，
+只有得到对象里面的值的时候，才会发送语句查询数据库
+Customer customer = session.load(Customer.class,2)
+调用load方法之后，不会马上发送sql语句
+（1）返回对象里面只有id值
+2 得到对象里面不是id的其他值时候才会发送sql语句
+
+2 延迟查询分成两类
+（1）类级别延迟
+根据id查询返回实体类对象，调用这个load方法不会马上发送语句
+（2）关联级别延迟
+查询出某个客户，在查询这个客户的所有联系人，查询客户的所有联系人的过程
+是否需要延迟，这个过程称为关联级别延迟
+
+关联级别延迟操作
+
+1 在映射文件中进行配置实现
+（1） 根据客户得到所有的联系人，在客户映射文件中配置
+
+2 在set标签上使用属性
+（1）fetch：值select
+（2）lazy：值
+true：延迟（延迟）
+false：不延迟
+extra：及其延迟
+
+
+
+
+
+
+
+script 代码校验 用户名不能为空
+onsubmit="return checkForm();"></intput>
+<script>
+
+	function checkForm(){
+var username = document.getElementById("username").value;
+if(username==null||username==''){
+alert("用户名不能为空");
+return false;
+}
+}
+</script>
+
+
+ajax异步校验
+用户名是否存在
+1 事件触发：
+<input type="text" id="username" onblur="checkUsername()">
+function checkUsername(){
+var username=document.getElementById("username").value;
+	1 创建异步交互对象
+var xhr = createXmlHttp();
+	2 设置监听
+xhr.onreadystatechange = function(){
+	if(xhr.readyState==4){
+		if(xhr.status==200){
+	document.getElementById("span1").innerHTML = xhr.responseText;
+}
+}
+}
+	3 打开连接
+xhr.open("GET","${pageContext.request.contextPath}/user_findByName.action?time="+new Date().getTime()+"username="username,true);
+	4 发送
+xhr.send(null);
+
+}
+1
+function createXmlHttp(){
+	var xmlHttp;
+	try{
+	xmlHttp = new XmlHttpRequest();
+}catch(e){
+	try{
+		xmlHttp = new ActiveXObject("Msxml2.XMLHTTP"); 
+} catch(e){
+	try{
+	xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+}catch(e){
+}
+}
+return xmlHttp; 
+}
+	
+
+
+
+
+    	function checkUserphone(){
+    		var user_phone=document.getElementsByName("user_phone")[0].value;
+    		var xhr = new XMLHttpRequest();
+    		console.log(xhr);
+    		xhr.onreadystatechange = function(){
+    			if(xhr.readyState==4){
+    				if(xhr.status==200){
+    					document.getElementById("span1").innerHTML = xhr.responseText;
+    				}
+    			}
+    		}
+    		xhr.open("GET","${pageContext.request.contextPath}/registAction_findByPhone?user_phone="+user_phone,true);
+    		xhr.send(null);
+    	}
+
+User existUser = userService.findByUsername(user.getUsername());
+获取response对象，向页面输出：
+HttpServletResponse response = ServletActionContext.getResponse();
+
+if(existUser!=null){
+	response.getWriter().println("<font color='red'>用户名已经存在</font>");
+}else{
+	response.getWriter.println("<font color='green'>用户名可以使用</font>");
+}
+return NONE;
+
+
+
+
+
+后台校验数据：
+1 在action所在包下创建一个校验的xml
+	创建一个与Action类名validation.xml(针对所有方法进行校验，只需要针对regist方法进行校验)
+	UserAction-user_regist-validation.xml
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validator PUBLIC
+	"-//Apache Struts//XWork Validator 1.0.3//EN"
+	"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+	<field name="username">
+		<field-validator type="requiredstring">
+		<message>用户名不能为空</message>
+		</field-validator>
+	</field>
+
+	<field name="email">
+		<field-validator type="email">
+			<message>邮箱格式不正确</message>
+		</field-validator>
+	</field>
+
+}
+</validators>
+
+配置input视图
+引struts2标签
+<%@ taglib uri="struts-tags" prefix="s"%>
+<s:fielderror/>
+<span><s:fielderror fieldName="email"/></span>
+
+public static String getUUID(){
+	return UUID.randomUUID().toString().replace("-","");
+
+
+
+
+
+
+
+登陆，将用户信息存入session
+ServletActionContext.getRequest().getSession().setAttribute("existUser",existUser);
+
+
+<result name="loginSuccess" type="redirectAction">index</result>
+
+
+
+ActionContext.getContext().getSession().put("clist",clist);
+
+<s:iterator var="c" value="#session.clist">
+	<s:property value="c.cname"/>
+</s:iterator>
